@@ -18,6 +18,10 @@ def structure_shipment_data(document_text: str) -> dict:
     """
     Convert raw logistics text into structured JSON.
     """
+    if not settings.OPENAI_API_KEY:
+        raise ValueError(
+            "OPENAI_API_KEY is not configured."
+        )
 
     try:
 
