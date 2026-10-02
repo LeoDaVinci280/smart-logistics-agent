@@ -88,6 +88,8 @@ def run_agent(user_message: str) -> str:
         str:
             Final assistant response.
     """
+    if not settings.OPENAI_API_KEY:
+        return "OpenAI API key is not configured."
 
     try:
 

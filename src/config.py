@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     Values are loaded automatically from the .env file.
     """
 
-    OPENAI_API_KEY: str
+    OPENAI_API_KEY: str = ""
 
     DATABASE_URL: str = "sqlite:///./data/logistics.db"
 
