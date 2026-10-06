@@ -10,6 +10,7 @@ Available tools:
 - calculate_duty_and_currency_tool
 """
 
+from sqlalchemy import func
 from src.parser import extract_text_from_pdf
 from src.llm_parser import structure_shipment_data
 from src.database import (
@@ -185,6 +186,43 @@ def db_transport_tool(
             }
 
         # ==================================================
+        # COUNT SHIPMENTS
+        # ==================================================
+
+        if action == "count":
+
+            total_shipments = (
+                db.query(Shipment)
+                .count()
+            )
+
+            return {
+                "total_shipments": total_shipments
+            }
+
+        # ==================================================
+        # AVERAGE SHIPPING COST
+        # ==================================================
+
+        if action == "average_cost":
+
+            average_cost = (
+                db.query(
+                    func.avg(
+                        Shipment.shipping_cost
+                    )
+                )
+                .scalar()
+            )
+
+            return {
+                "average_shipping_cost": round(
+                    float(average_cost),
+                    2
+                )
+            }
+    
+        # ==================================================
         # LIST ALL SHIPMENTS
         # ==================================================
 
@@ -199,6 +237,48 @@ def db_transport_tool(
                 for shipment in shipments
             ]
 
+        # ==================================================
+        # LIST COUNTRIES
+        # ==================================================
+
+        if action == "list_countries":
+
+            countries = (
+                db.query(
+                    Shipment.destination_country
+                )
+                .distinct()
+                .all()
+            )
+
+            return {
+                "countries": [
+                    country[0]
+                    for country in countries
+                ]
+            }
+    
+        # ==================================================
+        # LIST TRANSPORT MODES
+        # ==================================================
+
+        if action == "list_transport_modes":
+
+            transport_modes = (
+                db.query(
+                    Shipment.transport_mode
+                )
+                .distinct()
+                .all()
+            )
+
+            return {
+                "transport_modes": [
+                    mode[0]
+                    for mode in transport_modes
+                ]
+            }
+    
         # ==================================================
         # FILTER BY DESTINATION COUNTRY
         # ==================================================
@@ -287,7 +367,11 @@ OPENAI_TOOLS = [
                         "enum": [
                             "create",
                             "list",
-                            "filter_destination"
+                            "filter_destination",
+                            "count",
+                            "average_cost",
+                            "list_countries",
+                            "list_transport_modes"
                         ]
                     },
 
