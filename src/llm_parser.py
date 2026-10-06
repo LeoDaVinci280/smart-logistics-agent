@@ -31,7 +31,19 @@ def structure_shipment_data(document_text: str) -> dict:
                 {
                     "role": "system",
                     "content": (
-                        "Extract shipment information as JSON."
+                        "You are a logistics data extraction assistant. "
+                        "Extract shipment data and return valid JSON only. "
+                        "Use EXACTLY the following schema: "
+                        "{"
+                        "\"tracking_number\": string,"
+                        "\"sender\": string,"
+                        "\"recipient\": string,"
+                        "\"destination_country\": string,"
+                        "\"weight_kg\": number,"
+                        "\"shipping_cost\": number,"
+                        "\"currency\": string"
+                        "} "
+                        "Never use alternative field names."
                     )
                 },
                 {
