@@ -13,7 +13,8 @@ from fastapi import HTTPException
 from src.agent import run_agent
 
 from src.tools import (
-    parse_document_tool
+    parse_document_tool,
+    db_transport_tool
 )
 
 from src.database import init_db
@@ -128,7 +129,38 @@ def process_document(
             detail=str(ex)
         )
         
-        
+# ==========================================================
+# ANALYTICS
+# ==========================================================
+
+@app.get("/analytics")
+def analytics():
+    """
+    Returns high-level logistics metrics.
+    """
+
+    return {
+        "total_shipments": db_transport_tool(
+            "count",
+            {}
+        ),
+
+        "average_cost": db_transport_tool(
+            "average_cost",
+            {}
+        ),
+
+        "countries": db_transport_tool(
+            "list_countries",
+            {}
+        ),
+
+        "transport_modes": db_transport_tool(
+            "list_transport_modes",
+            {}
+        )
+    }
+         
 # ==========================================================
 # VERSION
 # ==========================================================
