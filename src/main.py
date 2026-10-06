@@ -9,6 +9,7 @@ Endpoints:
 
 from fastapi import FastAPI
 from fastapi import HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.agent import run_agent
 
@@ -37,6 +38,15 @@ app = FastAPI(
         "Multi-Tool AI Agent for Freight & Logistics"
     ),
     version="1.0.0"
+)
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
