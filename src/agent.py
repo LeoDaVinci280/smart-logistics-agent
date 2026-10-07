@@ -126,10 +126,23 @@ def run_agent(user_message: str) -> str:
                     "You specialize in shipment management, "
                     "customs duty calculations, freight invoicing, "
                     "transport document analysis and logistics operations. "
+
+                    "Always use the database tool when the user asks "
+                    "about shipments, destinations, countries, "
+                    "transport modes, shipping costs, statistics, "
+                    "analytics or logistics records. "
+
+                    "Do not guess database information. "
+                    "Always retrieve it using tools. "
+
                     "You may use multiple tools whenever necessary "
-                    "to accomplish the user's request. "
-                    "Always complete the requested workflow "
-                    "before responding."
+                    "to complete the user's request. "
+                    
+                    "Always interpret destinations, destination countries, "
+                    "countries served, delivery countries and countries "
+                    "as destination_country information stored in the database."
+
+                    "Always complete the workflow before responding."
                 )
             },
             {

@@ -214,3 +214,39 @@ button:hover {
 
     border: 1px solid #e5e7eb;
 }
+
+.table-container {
+
+    overflow-x: auto;
+}
+
+#shipment-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+#shipment-table th {
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 12px;
+
+    text-align: left;
+}
+
+#shipment-table td {
+
+    padding: 12px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#shipment-table tr:hover {
+
+    background: #f8fafc;
+}
+
