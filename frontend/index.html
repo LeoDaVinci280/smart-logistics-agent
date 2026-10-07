@@ -4,6 +4,10 @@
 
 <head>
 
+    <!-- ============================================= -->
+    <!-- PAGE METADATA                                 -->
+    <!-- ============================================= -->
+
     <meta charset="UTF-8">
 
     <meta
@@ -14,6 +18,10 @@
         Smart Logistics Agent
     </title>
 
+    <!-- ============================================= -->
+    <!-- STYLESHEET                                    -->
+    <!-- ============================================= -->
+
     <link
         rel="stylesheet"
         href="css/main.css">
@@ -21,106 +29,227 @@
 </head>
 
 <body>
+
+    <!-- ============================================= -->
+    <!-- APPLICATION CONTAINER                         -->
+    <!-- ============================================= -->
+
     <div class="container">
+
+        <!-- ========================================= -->
+        <!-- APPLICATION TITLE                         -->
+        <!-- ========================================= -->
+
         <h1>
             Smart Logistics Agent
         </h1>
 
         <!-- ========================================= -->
-        <!-- DASHBOARD                                 -->
+        <!-- MAIN LAYOUT                               -->
+        <!-- ========================================= -->
+        <!--                                           -->
+        <!-- Dashboard on the left                     -->
+        <!-- AI Agent on the right                     -->
+        <!--                                           -->
+        <!-- ========================================= -->
+
+        <div class="main-layout">
+
+            <!-- ===================================== -->
+            <!-- DASHBOARD                             -->
+            <!-- ===================================== -->
+
+            <section class="card dashboard-card">
+
+                <h2>
+                    Logistics Dashboard
+                </h2>
+
+                <div id="dashboard">
+
+                    <!-- KPI CARDS -->
+
+                    <div class="kpi-grid">
+
+                        <div class="kpi-card">
+
+                            <div
+                                id="total-shipments"
+                                class="kpi-value">
+
+                                -
+
+                            </div>
+
+                            <div class="kpi-label">
+
+                                Total Shipments
+
+                            </div>
+
+                        </div>
+
+                        <div class="kpi-card">
+
+                            <div
+                                id="average-cost"
+                                class="kpi-value">
+
+                                -
+
+                            </div>
+
+                            <div class="kpi-label">
+
+                                Average Cost
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- DETAILS -->
+
+                    <div class="details-grid">
+
+                        <!-- Countries -->
+
+                        <div class="card-small">
+
+                            <h3>
+                                Countries
+                            </h3>
+
+                            <div id="countries">
+
+                                Loading...
+
+                            </div>
+
+                        </div>
+
+                        <!-- Transport Modes -->
+
+                        <div class="card-small">
+
+                            <h3>
+                                Transport Modes
+                            </h3>
+
+                            <div id="transport-modes">
+
+                                Loading...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ===================================== -->
+            <!-- AI AGENT CHAT                         -->
+            <!-- ===================================== -->
+
+            <section class="card chat-card">
+
+                <h2>
+                    AI Logistics Agent
+                </h2>
+
+                <!-- User message -->
+
+                <textarea
+                    id="user-message"
+                    placeholder="Ask a logistics question..."
+                ></textarea>
+
+                <!-- Send button -->
+
+                <button onclick="sendMessage()">
+
+                    Ask Agent
+
+                </button>
+
+                <!-- Conversation history -->
+
+                <div id="chat-history">
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- ========================================= -->
+        <!-- PDF ANALYSIS                              -->
         <!-- ========================================= -->
 
         <section class="card">
 
             <h2>
-                Logistics Dashboard
+                Analyze Logistics Document
             </h2>
 
-            <div id="dashboard">
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div
-                            id="total-shipments"
-                            class="kpi-value">
-                            -
-                        </div>
-                        <div class="kpi-label">
-                            Total Shipments
-                        </div>
-                    </div>
+            <p>
 
-                    <div class="kpi-card">
-                        <div
-                            id="average-cost"
-                            class="kpi-value">
-                            -
-                        </div>
-                        <div class="kpi-label">
-                            Average Cost
-                        </div>
-                    </div>
-                </div>
-                <div class="details-grid">
-                    <div class="card-small">
-                        <h3>
-                            Countries
-                        </h3>
-                        <div id="countries">
-                        </div>
-                    </div>
-                    <div class="card-small">
-                        <h3>
-                            Transport Modes
-                        </h3>
-                        <div id="transport-modes">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                Select a shipment or logistics PDF document
+                and analyze its content.
 
-        <!-- ========================================= -->
-        <!-- CHAT                                      -->
-        <!-- ========================================= -->
+            </p>
 
-        <section class="card">
+            <input
+                type="file"
+                id="pdf-file"
+                accept=".pdf">
 
-            <h2>
-                AI Agent Chat
-            </h2>
+            <button
+                onclick="analyzePdf()">
 
-            <textarea
-                id="user-message"
-                placeholder="Ask a logistics question..."
-            ></textarea>
-
-            <button onclick="sendMessage()">
-
-                Ask Agent
+                Analyze PDF
 
             </button>
 
+            <div id="pdf-result">
+
+            </div>
+
         </section>
 
         <!-- ========================================= -->
-        <!-- RESPONSE                                  -->
+        <!-- FUTURE SHIPMENT TABLE                     -->
+        <!-- ========================================= -->
+        <!--                                           -->
+        <!-- Reserved for the next iteration.          -->
+        <!-- A shipment data table will be displayed   -->
+        <!-- here.                                     -->
+        <!--                                           -->
         <!-- ========================================= -->
 
         <section class="card">
 
             <h2>
-                Agent Response
+                Shipment Database
             </h2>
 
-            <div id="response">
+            <p>
 
-                No response yet.
+                Shipment table coming in the next version.
 
-            </div>
+            </p>
 
         </section>
 
     </div>
+
+    <!-- ============================================= -->
+    <!-- JAVASCRIPT                                   -->
+    <!-- ============================================= -->
 
     <script src="js/app.js"></script>
 
