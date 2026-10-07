@@ -250,3 +250,9 @@ button:hover {
     background: #f8fafc;
 }
 
+#save-shipment-button {
+
+    display: none;
+
+    margin-top: 15px;
+}

@@ -230,6 +230,25 @@ async def upload_pdf(
         "filename": file.filename,
         "result": result
     }
+    
+# ==========================================================
+# SAVE SHIPMENT
+# ==========================================================
+
+@app.post("/save-shipment")
+def save_shipment(
+    shipment_data: dict
+):
+    """
+    Save a shipment into the database.
+    """
+
+    result = db_transport_tool(
+        action="create",
+        payload=shipment_data
+    )
+
+    return result
      
 # ==========================================================
 # VERSION
