@@ -220,6 +220,15 @@ async function analyzePdf() {
         return;
     }
 
+    document.getElementById(
+        "pdf-loading"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "pdf-result"
+    ).innerHTML = "";
+
     const formData =
         new FormData();
 
@@ -241,6 +250,11 @@ async function analyzePdf() {
 
         const result =
             await response.json();
+
+        document.getElementById(
+            "pdf-loading"
+        ).style.display =
+            "none";
 
         currentShipment = result.result;
         if (currentShipment) {
@@ -264,6 +278,11 @@ async function analyzePdf() {
             "pdf-result"
         ).innerHTML =
             "PDF analysis failed.";
+            
+        document.getElementById(
+            "pdf-loading"
+        ).style.display =
+            "none";
     }
 }
 
@@ -294,6 +313,12 @@ async function saveShipment() {
             );
 
         const result = await response.json();
+
+        if (result.status === "already_exists") {
+            alert(result.message);
+            return;
+        }
+
         alert(`Shipment saved (ID ${result.shipment_id})`);
         //
         // Refresh dashboard
