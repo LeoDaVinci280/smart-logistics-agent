@@ -1,5 +1,13 @@
 console.log("app.js loaded");
 
+/**
+ * Last extracted shipment.
+ *
+ * Stores the latest result returned by
+ * the PDF analysis endpoint.
+ */
+let currentShipment = null;
+
 const API_BASE_URL =
     "http://127.0.0.1:8000";
 
@@ -234,6 +242,13 @@ async function analyzePdf() {
         const result =
             await response.json();
 
+        currentShipment = result.result;
+        if (currentShipment) {
+            document.getElementById(
+                "save-shipment-button"
+            ).style.display = "inline-block";
+        }
+
         document.getElementById(
             "pdf-result"
         ).innerHTML =
@@ -249,6 +264,48 @@ async function analyzePdf() {
             "pdf-result"
         ).innerHTML =
             "PDF analysis failed.";
+    }
+}
+
+/**
+ * Save analyzed shipment into database.
+ */
+async function saveShipment() {
+
+    if (!currentShipment) {
+        alert("No shipment available.");
+        return;
+    }
+
+    try {
+        const response =
+            await fetch(
+                `${API_BASE_URL}/save-shipment`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body: JSON.stringify(
+                        currentShipment
+                    )
+                }
+            );
+
+        const result = await response.json();
+        alert(`Shipment saved (ID ${result.shipment_id})`);
+        //
+        // Refresh dashboard
+        //
+        loadDashboard();
+        //
+        // Refresh table
+        //
+        loadShipments();
+
+    } catch (error) {
+        alert("Unable to save shipment.");
     }
 }
 

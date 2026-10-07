@@ -191,18 +191,15 @@
         <!-- ========================================= -->
 
         <section class="card">
-
             <h2>
                 Analyze Logistics Document
             </h2>
-
             <p>
 
                 Select a shipment or logistics PDF document
                 and analyze its content.
 
             </p>
-
             <input
                 type="file"
                 id="pdf-file"
@@ -214,11 +211,15 @@
                 Analyze PDF
 
             </button>
-
             <div id="pdf-result">
-
             </div>
+            <button
+                id="save-shipment-button"
+                onclick="saveShipment()">
 
+                Save To Database
+
+            </button>
         </section>
 
         <!-- ========================================= -->
