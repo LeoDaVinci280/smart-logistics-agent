@@ -195,37 +195,61 @@ async function sendMessage() {
 
 async function analyzePdf() {
 
-    const response =
-        await fetch(
-            `${API_BASE_URL}/agent/process-document`,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
-
-                body: JSON.stringify({
-                    file_path:
-                        "data/sample_invoice.pdf"
-                })
-            }
+    const fileInput =
+        document.getElementById(
+            "pdf-file"
         );
 
-    const result =
-        await response.json();
+    const file =
+        fileInput.files[0];
 
-    document.getElementById(
-        "pdf-result"
-    ).innerHTML =
-        `<pre>
-${JSON.stringify(
-    result,
-    null,
-    2
-)}
-</pre>`;
+    if (!file) {
+
+        alert(
+            "Please select a PDF file."
+        );
+
+        return;
+    }
+
+    const formData =
+        new FormData();
+
+    formData.append(
+        "file",
+        file
+    );
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/upload-pdf`,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+        const result =
+            await response.json();
+
+        document.getElementById(
+            "pdf-result"
+        ).innerHTML =
+            `<pre>${JSON.stringify(
+                result,
+                null,
+                2
+            )}</pre>`;
+
+    } catch (error) {
+
+        document.getElementById(
+            "pdf-result"
+        ).innerHTML =
+            "PDF analysis failed.";
+    }
 }
 
 
