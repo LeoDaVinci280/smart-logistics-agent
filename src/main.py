@@ -11,6 +11,11 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from fastapi import UploadFile
+from fastapi import File
+
+from pathlib import Path
+
 from src.agent import run_agent
 
 from src.tools import (
@@ -185,6 +190,46 @@ def get_shipments():
         action="list",
         payload={}
     )
+    
+# ==========================================================
+# PDF UPLOAD
+# ==========================================================
+
+@app.post("/upload-pdf")
+async def upload_pdf(
+    file: UploadFile = File(...)
+):
+    """
+    Upload and analyze a PDF document.
+    """
+
+    upload_dir = Path("uploads")
+
+    upload_dir.mkdir(
+        exist_ok=True
+    )
+
+    file_path = (
+        upload_dir / file.filename
+    )
+
+    with open(
+        file_path,
+        "wb"
+    ) as buffer:
+
+        content = await file.read()
+
+        buffer.write(content)
+
+    result = parse_document_tool(
+        str(file_path)
+    )
+
+    return {
+        "filename": file.filename,
+        "result": result
+    }
      
 # ==========================================================
 # VERSION
