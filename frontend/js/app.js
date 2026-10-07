@@ -150,7 +150,42 @@ async function sendMessage() {
             "user-message"
         ).value;
 
+    if (!userMessage.trim()) {
+        return;
+    }
+
+    const history =
+        document.getElementById(
+            "chat-history"
+        );
+
     try {
+
+        history.innerHTML += `
+
+            <div class="chat-role">
+
+                👤 You
+
+            </div>
+
+            <div class="user-message">
+
+                ${userMessage}
+
+            </div>
+        `;
+
+        history.innerHTML += `
+
+            <div
+                id="thinking-message"
+                class="agent-message">
+
+                🤖 Thinking...
+
+            </div>
+        `;
 
         const response =
             await fetch(
@@ -175,29 +210,52 @@ async function sendMessage() {
         const result =
             await response.json();
 
-        const history =
+        const thinking =
             document.getElementById(
-                "chat-history"
+                "thinking-message"
             );
 
+        if (thinking) {
+
+            thinking.remove();
+        }
+
         history.innerHTML += `
-            <div class="user-message">
-                ${userMessage}
+
+            <div class="chat-role">
+
+                🤖 Smart Logistics Agent
+
+            </div>
+
+            <div class="agent-message">
+
+                ${result.response}
+
             </div>
         `;
 
-        history.innerHTML += `
-            <div class="agent-message">
-                ${result.response}
-            </div>
-        `;
+    history.scrollTop = history.scrollHeight;
+        document.getElementById(
+        "user-message"
+    ).value = "";
 
     } catch (error) {
 
-        document.getElementById(
-            "response"
-        ).textContent =
-            "Unable to contact the AI agent.";
+        history.innerHTML += `
+
+            <div class="chat-role">
+
+                🤖 Smart Logistics Agent
+
+            </div>
+
+            <div class="agent-message">
+
+                Unable to contact the AI agent.
+
+            </div>
+        `;
     }
 }
 
