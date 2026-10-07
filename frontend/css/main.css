@@ -256,3 +256,20 @@ button:hover {
 
     margin-top: 15px;
 }
+
+#pdf-loading {
+
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}

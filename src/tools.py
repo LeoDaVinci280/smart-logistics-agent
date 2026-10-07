@@ -170,6 +170,27 @@ def db_transport_tool(
         # ==================================================
 
         if action == "create":
+            
+            existing_shipment = (
+                db.query(Shipment)
+                .filter(
+                    Shipment.tracking_number ==
+                    payload["tracking_number"]
+                )
+                .first()
+            )
+
+            if existing_shipment:
+
+                return {
+                    "status": "already_exists",
+                    "message": (
+                        f"Shipment "
+                        f"{payload['tracking_number']} "
+                        f"already exists."
+                    ),
+                    "shipment_id": existing_shipment.id
+                }
 
             shipment = Shipment(**payload)
 
