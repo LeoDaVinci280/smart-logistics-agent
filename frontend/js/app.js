@@ -62,6 +62,75 @@ async function loadDashboard() {
     }
 }
 
+/**
+ * Load shipment database.
+ */
+async function loadShipments() {
+    try {
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/shipments`
+            );
+
+        const shipments =
+            await response.json();
+
+        const body =
+            document.getElementById(
+                "shipment-table-body"
+            );
+
+        body.innerHTML = "";
+
+        shipments.forEach(
+            shipment => {
+
+            body.innerHTML += `
+                <tr>
+
+                    <td>
+                        ${shipment.tracking_number}
+                    </td>
+
+                    <td>
+                        ${shipment.destination_country}
+                    </td>
+
+                    <td>
+                        ${shipment.transport_mode}
+                    </td>
+
+                    <td>
+                        ${shipment.incoterm}
+                    </td>
+
+                    <td>
+                        ${shipment.weight_kg}
+                    </td>
+
+                    <td>
+                        ${shipment.shipping_cost}
+                    </td>
+
+                    <td>
+                        ${shipment.currency}
+                    </td>
+
+                </tr>
+            `;
+        }
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load shipments",
+            error
+        );
+    }
+}
+
 
 /**
  * Send a message to the AI agent.
@@ -161,3 +230,4 @@ ${JSON.stringify(
 
 
 loadDashboard();
+loadShipments();
