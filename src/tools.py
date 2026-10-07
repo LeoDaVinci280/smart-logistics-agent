@@ -320,6 +320,51 @@ def db_transport_tool(
                 shipment.to_dict()
                 for shipment in shipments
             ]
+            
+        # ==================================================
+        # GET SHIPMENT BY TRACKING NUMBER
+        # ==================================================
+
+        if action == "get_by_tracking_number":
+
+            shipment = (
+                db.query(Shipment)
+                .filter(
+                    Shipment.tracking_number ==
+                    payload["tracking_number"]
+                )
+                .first()
+            )
+
+            if not shipment:
+
+                return {
+                    "status": "not_found"
+                }
+
+            return {
+                "status": "success",
+                "shipment": {
+                    "tracking_number":
+                        shipment.tracking_number,
+                    "sender":
+                        shipment.sender,
+                    "recipient":
+                        shipment.recipient,
+                    "destination_country":
+                        shipment.destination_country,
+                    "transport_mode":
+                        shipment.transport_mode,
+                    "incoterm":
+                        shipment.incoterm,
+                    "weight_kg":
+                        shipment.weight_kg,
+                    "shipping_cost":
+                        shipment.shipping_cost,
+                    "currency":
+                        shipment.currency
+                }
+            }
 
         # ==================================================
         # UNSUPPORTED ACTION
@@ -385,6 +430,10 @@ OPENAI_TOOLS = [
 
                     "action": {
                         "type": "string",
+                        "description": (
+                            "Database operation to perform."
+                            "Use get_by_tracking_number when the user requests a shipment by its tracking number."
+                        ),
                         "enum": [
                             "create",
                             "list",
@@ -392,12 +441,19 @@ OPENAI_TOOLS = [
                             "count",
                             "average_cost",
                             "list_countries",
-                            "list_transport_modes"
+                            "list_transport_modes",
+                            "get_by_tracking_number"
                         ]
                     },
 
                     "payload": {
-                        "type": "object"
+                        "type": "object",
+                        "description": (
+                            "Additional parameters required by "
+                            "the selected action. "
+                            "For get_by_tracking_number use: "
+                            "{'tracking_number': 'TRACKING_NUMBER'}"
+                        )
                     }
 
                 },

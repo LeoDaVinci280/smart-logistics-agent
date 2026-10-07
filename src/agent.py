@@ -143,6 +143,10 @@ def run_agent(user_message: str) -> str:
                     "as destination_country information stored in the database."
 
                     "Always complete the workflow before responding."
+                    "If a user requests information that cannot be "
+                    "retrieved with the available tools, explicitly "
+                    "state that the capability is not implemented. "
+                    "Never invent shipment data."
                 )
             },
             {
