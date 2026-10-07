@@ -273,3 +273,60 @@ button:hover {
 
     font-weight: bold;
 }
+
+/* ===================================================== */
+/* PDF ANALYSIS RESULT                                   */
+/* ===================================================== */
+
+.pdf-summary {
+
+    margin-top: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(200px, 1fr)
+    );
+
+    gap: 15px;
+
+}
+.pdf-field {
+
+    background: #f8fafc;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    border-left: 4px solid #2563eb;
+
+    transition: transform 0.2s;
+}
+
+.pdf-field:hover {
+
+    transform: translateY(-2px);
+}
+
+.pdf-label {
+
+    font-size: 0.8rem;
+
+    color: #64748b;
+
+    margin-bottom: 6px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+.pdf-value {
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    color: #1f2937;
+}

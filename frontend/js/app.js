@@ -263,14 +263,117 @@ async function analyzePdf() {
             ).style.display = "inline-block";
         }
 
+        const shipment =
+            result.result;
+
         document.getElementById(
             "pdf-result"
-        ).innerHTML =
-            `<pre>${JSON.stringify(
-                result,
-                null,
-                2
-            )}</pre>`;
+        ).innerHTML = `
+
+            <h3>
+                ✅ Shipment Successfully Analysed
+            </h3>
+
+            <div class="pdf-summary">
+
+                <div class="pdf-field">
+
+                    <div class="pdf-label">
+                        Tracking Number
+                    </div>
+
+                    <div class="pdf-value">
+                        ${shipment.tracking_number}
+                    </div>
+
+                </div>
+
+                <div class="pdf-field">
+
+                    <div class="pdf-label">
+                        Sender
+                    </div>
+
+                    <div class="pdf-value">
+                        ${shipment.sender}
+                    </div>
+
+                </div>
+
+                <div class="pdf-field">
+
+                    <div class="pdf-label">
+                        Recipient
+                    </div>
+
+                    <div class="pdf-value">
+                        ${shipment.recipient}
+                    </div>
+
+                </div>
+
+                <div class="pdf-field">
+
+                    <div class="pdf-label">
+                        Destination Country
+                    </div>
+
+                    <div class="pdf-value">
+                        ${shipment.destination_country}
+                    </div>
+
+                </div>
+
+                <div class="pdf-field">
+
+                    <div class="pdf-label">
+                        Transport Mode
+                    </div>
+
+                    <div class="pdf-value">
+                        ${shipment.transport_mode}
+                    </div>
+
+                </div>
+
+                <div class="pdf-field">
+
+                    <div class="pdf-label">
+                        Incoterm
+                    </div>
+
+                    <div class="pdf-value">
+                        ${shipment.incoterm}
+                    </div>
+
+                </div>
+
+                <div class="pdf-field">
+
+                    <div class="pdf-label">
+                        Weight
+                    </div>
+
+                    <div class="pdf-value">
+                        ${shipment.weight_kg} kg
+                    </div>
+
+                </div>
+
+                <div class="pdf-field">
+
+                    <div class="pdf-label">
+                        Shipping Cost
+                    </div>
+
+                    <div class="pdf-value">
+                        ${shipment.shipping_cost} ${shipment.currency}
+                    </div>
+
+                </div>
+
+            </div>
+        `;
 
     } catch (error) {
 
@@ -278,7 +381,7 @@ async function analyzePdf() {
             "pdf-result"
         ).innerHTML =
             "PDF analysis failed.";
-            
+
         document.getElementById(
             "pdf-loading"
         ).style.display =
@@ -318,6 +421,11 @@ async function saveShipment() {
             alert(result.message);
             return;
         }
+
+        document.getElementById(
+            "save-shipment-button"
+        ).style.display =
+            "none";
 
         alert(`Shipment saved (ID ${result.shipment_id})`);
         //
