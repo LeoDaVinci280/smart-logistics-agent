@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-API-green)
-![OpenAO](https://img.shields.io/badge/OpenAI-Function_Calling-black)
+![OpenAI](https://img.shields.io/badge/OpenAI-Function_Calling-black)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-blue)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)
 
@@ -32,6 +32,15 @@ Users can:
 - FastAPI REST API
 - SQLAlchemy & SQLite
 - Docker Deployment
+
+---
+
+## Key Technical Highlights
+ 
+- **Native Tool Calling**: Implemented deterministic function calling directly via OpenAI API schemas without heavy/unstable frameworks.
+- **Data Validation & Typing**: Strict schema enforcement using Pydantic models for both LLM output parsing and API payload handling.
+- **Relational Storage**: Complete SQLAlchemy ORM setup with relational querying (shipments, tracking, locations).
+- **Containerization**: Full Docker Compose setup for instant deployment and reproducibility.
 
 ---
 
@@ -89,31 +98,30 @@ Unlike a traditional chatbot, the Smart Logistics Agent can interact with backen
 The application follows a layered architecture that combines conversational AI, backend services, document processing and database operations.
 
 ```text
-+----------------------+
-|    Frontend UI       |
-+----------------------+
-            |
-            v
-+----------------------+
-|      FastAPI API     |
-+----------------------+
-            |
-            v
-+----------------------+
-|   AI Logistics Agent |
-|  (OpenAI GPT Model)  |
-+----------------------+
-            |
-            v
-+----------------------+
-|      Tool Layer      |
-+----------------------+
-      |           |
-      v           v
-+-----------+ +-----------+
-|  SQLite   | | PDF AI    |
-| Database  | | Parsing   |
-+-----------+ +-----------+
++-------------------------------------------------------+
+|                     Frontend UI                       |
+|   (Dashboard, Chat Interface, PDF Upload, Tables)     |
++-------------------------------------------------------+
+                           |
+                           v
++-------------------------------------------------------+
+|                    FastAPI Backend                    |
+|             (REST API & Swagger Docs)                 |
++-------------------------------------------------------+
+                           |
+                           v
++-------------------------------------------------------+
+|             AI Agent Orchestrator                     |
+|           (OpenAI GPT + Function Calling)             |
++-------------------------------------------------------+
+                           |
+             +-------------+-------------+
+             |                           |
+             v                           v
++------------------------+  +---------------------------+
+|    Database Tool       |  |   Document Analysis Tool  |
+| (SQLAlchemy / SQLite)  |  |    (PDF Data Extraction)  |
++------------------------+  +---------------------------+
 ```
 
 ### Core Components
