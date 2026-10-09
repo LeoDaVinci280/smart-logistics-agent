@@ -1,0 +1,20 @@
+
+services:
+
+  smart-logistics-agent:
+
+    build: .
+
+    container_name: smart-logistics-agent
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./uploads:/app/uploads
+      - ./data:/app/data
+
+    restart: unless-stopped
