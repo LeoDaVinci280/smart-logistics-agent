@@ -1,10 +1,10 @@
 # Smart Logistics Agent
 
-https://img.shields.io/badge/Python-3.12-blue
-![FastAPI](httpslds.io/badge/FastAPI-API-green
-![OpenAI](https://img.shields.io/badge/OpenAI-Function_Cck
-![SQLiteimg.shields.io/badge/SQLite-Database-blue
-![Dockerimg.shields.io/badge/Docker-Containerized-blue
+![Python](https://img.shields.io/badge12-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-API-green)
+![OpenAO](https://img.shields.io/badge/OpenAI-Function_Calling-black)
+![SQLite](https://img.shields.io/badge/SQLite-Database-blue)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)
 
 AI-powered freight and logistics assistant built with FastAPI, OpenAI Function Calling, SQLAlchemy, SQLite and Docker.
 
