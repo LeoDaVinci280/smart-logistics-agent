@@ -1,6 +1,6 @@
 # Smart Logistics Agent
 
-![Python](https://img.shields.io/badge12-blue)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-API-green)
 ![OpenAO](https://img.shields.io/badge/OpenAI-Function_Calling-black)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-blue)
